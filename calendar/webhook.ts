@@ -26,6 +26,7 @@ router.post("/", (req, res) => {
         body: JSON.stringify(req.body),
       }
     );
+    console.log("Webhook payload forwarded successfully.");
   } catch (error) {
     console.error("Error processing webhook payload:", error);
     return res.status(500).json({ error: "Internal Server Error" });
