@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const message = req.body?.message;
 
   // const call = message.call;
@@ -18,13 +18,17 @@ router.post("/", (req, res) => {
   console.log("Received webhook payload:", req.body);
 
   try {
-    fetch(
+    const ghlResponse = await fetch(
       "https://services.leadconnectorhq.com/hooks/SHuJusL6JEW1OIZqQSIz/webhook-trigger/463ddc80-be48-45e2-ae10-90580d86cbec",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(req.body),
       }
+    );
+    console.log(
+      "Webhook payload forwarded to LeadConnectorHQ. Response status:",
+      ghlResponse
     );
     console.log("Webhook payload forwarded successfully.");
   } catch (error) {
