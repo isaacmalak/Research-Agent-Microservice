@@ -16,6 +16,20 @@ router.post("/", (req, res) => {
 
   // console.log("Extracted call data:", data);
   console.log("Received webhook payload:", req.body);
+
+  try {
+    fetch(
+      "https://services.leadconnectorhq.com/hooks/SHuJusL6JEW1OIZqQSIz/webhook-trigger/463ddc80-be48-45e2-ae10-90580d86cbec",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(req.body),
+      }
+    );
+  } catch (error) {
+    console.error("Error processing webhook payload:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
   res.status(200).json(req.body);
 });
 
