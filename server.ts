@@ -1,5 +1,5 @@
 import express from "express";
-import webhook from "./calendar/calendar.js";
+import webhook from "./calendar/webhook.js";
 
 const app = express();
 const PORT = 3000;
